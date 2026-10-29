@@ -1,0 +1,41 @@
+@page
+@model Autoszerviz.Pages.Ugyfelek.IndexModel
+@{
+    ViewData["Title"] = "Ügyfelek";
+}
+
+<h1>Ügyfelek</h1>
+
+@if (TempData["Hiba"] is string hiba)
+{
+    <div class="alert alert-danger">@hiba</div>
+}
+
+<p><a asp-page="Create" class="btn btn-primary">Új ügyfél</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Név</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model.Ugyfelek)
+        {
+            <tr>
+                <td>@u.Nev</td>
+                <td>@u.Telefon</td>
+                <td>@u.Email</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@u.Id">Szerkesztés</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@u.Id" style="display:inline">
+                        <button type="submit" onclick="return confirm('Biztosan törlöd?')">Törlés</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
