@@ -1,0 +1,36 @@
+﻿@page
+@model Autoszerviz.Pages.Ugyfelek.CreateModel
+@{
+    ViewData["Title"] = "Új ügyfél";
+}
+
+<h1>Új ügyfél</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Nev" class="form-label">Név</label>
+        <input asp-for="Input.Nev" class="form-control" />
+        <span asp-validation-for="Input.Nev" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Telefon" class="form-label">Telefon</label>
+        <input asp-for="Input.Telefon" class="form-control" />
+        <span asp-validation-for="Input.Telefon" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Email" class="form-label">E-mail</label>
+        <input asp-for="Input.Email" class="form-control" />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Mentés</button>
+    <a asp-page="Index" class="btn btn-secondary">Mégse</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
