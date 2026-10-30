@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Javítások";
 }
+@if (TempData["Hiba"] is string hiba)
+{
+    <div class="alert alert-danger">@hiba</div>
+}
 
 <h1>Javítások</h1>
 

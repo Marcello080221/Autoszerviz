@@ -1,5 +1,6 @@
 using Autoszerviz.Data;
 using Autoszerviz.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,5 +23,32 @@ public class IndexModel : PageModel
             .Include(j => j.Ugyfel)
             .OrderByDescending(j => j.FelvetelDatuma)
             .ToListAsync();
+    }
+
+    public async Task<IActionResult> OnPostAllapotAsync(int id, JavitasAllapot ujAllapot, decimal? koltseg)
+    {
+        var javitas = await _db.Javitasok.FirstOrDefaultAsync(j => j.Id == id);
+
+        if (javitas is null)
+        {
+            TempData["Hiba"] = "A javítás nem található.";
+            return RedirectToPage();
+        }
+
+        if (ujAllapot == JavitasAllapot.Kesz)
+        {
+            if (koltseg is null || koltseg <= 0)
+            {
+                TempData["Hiba"] = "A javítás csak pozitív költséggel állítható készre.";
+                return RedirectToPage();
+            }
+
+            javitas.Koltseg = koltseg;
+        }
+
+        javitas.Allapot = ujAllapot;
+        await _db.SaveChangesAsync();
+
+        return RedirectToPage();
     }
 }
