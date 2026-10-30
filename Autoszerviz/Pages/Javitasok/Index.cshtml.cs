@@ -36,6 +36,20 @@ public class IndexModel : PageModel
             .ToListAsync();
     }
 
+    public async Task<IActionResult> OnPostDeleteAsync(int id)
+    {
+        var javitas = await _db.Javitasok.FirstOrDefaultAsync(j => j.Id == id);
+
+        if (javitas is null)
+        {
+            return RedirectToPage();
+        }
+
+        _db.Javitasok.Remove(javitas);
+        await _db.SaveChangesAsync();
+        return RedirectToPage();
+    }
+
     public async Task<IActionResult> OnPostAllapotAsync(int id, JavitasAllapot ujAllapot, decimal? koltseg)
     {
         var javitas = await _db.Javitasok.FirstOrDefaultAsync(j => j.Id == id);
@@ -46,7 +60,7 @@ public class IndexModel : PageModel
             return RedirectToPage();
         }
 
-        if (ujAllapot == JavitasAllapot.Kész)
+        if (ujAllapot == JavitasAllapot.Kesz)
         {
             if (koltseg is null || koltseg <= 0)
             {

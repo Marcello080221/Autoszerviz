@@ -20,7 +20,7 @@ public class Javitas
 
     public decimal? Koltseg { get; set; }
 
-    public JavitasAllapot Allapot { get; set; } = JavitasAllapot.Felvéve;
+    public JavitasAllapot Allapot { get; set; } = JavitasAllapot.Felveve;
 
     public DateTime FelvetelDatuma { get; set; } = DateTime.Now;
 }

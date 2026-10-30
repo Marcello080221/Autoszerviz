@@ -1,4 +1,5 @@
 @page
+@using Autoszerviz.Models
 @model Autoszerviz.Pages.Javitasok.IndexModel
 @{
     ViewData["Title"] = "Javítások";
@@ -32,6 +33,7 @@
             <th>Költség</th>
             <th>Állapot</th>
             <th>Felvétel</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -42,9 +44,25 @@
                 <td>@j.Rendszam</td>
                 <td>@j.Leiras</td>
                 <td>@(j.Koltseg?.ToString("C0") ?? "-")</td>
-                <td>@j.Allapot</td>
+                <td>
+                    <form method="post" asp-page-handler="Allapot" asp-route-id="@j.Id" class="d-flex gap-1">
+                        <select name="ujAllapot" class="form-select form-select-sm">
+                            <option value="Felveve" selected="@(j.Allapot == JavitasAllapot.Felveve)">Felvéve</option>
+                            <option value="Folyamatban" selected="@(j.Allapot == JavitasAllapot.Folyamatban)">Folyamatban</option>
+                            <option value="Kesz" selected="@(j.Allapot == JavitasAllapot.Kesz)">Kész</option>
+                        </select>
+                        <input type="number" name="koltseg" step="1" min="0" value="@j.Koltseg" class="form-control form-control-sm" style="width:110px" placeholder="Költség" />
+                        <button type="submit" class="btn btn-sm btn-success">Mentés</button>
+                    </form>
+                </td>
                 <td>@j.FelvetelDatuma.ToString("yyyy.MM.dd HH:mm")</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@j.Id">Szerkesztés</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@j.Id" style="display:inline">
+                        <button type="submit" onclick="return confirm('Biztosan törlöd?')">Törlés</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
-</table> 
+</table>

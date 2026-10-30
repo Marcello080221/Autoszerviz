@@ -2,7 +2,7 @@
 
 public enum JavitasAllapot
 {
-    Felvéve,
+    Felveve,
     Folyamatban,
-    Kész
+    Kesz
 }
