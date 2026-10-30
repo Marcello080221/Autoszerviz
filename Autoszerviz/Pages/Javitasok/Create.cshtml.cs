@@ -75,7 +75,7 @@ public class CreateModel : PageModel
 
     public class JavitasInput
     {
-        public int UgyfelId { get; set; }
+        public int? UgyfelId { get; set; }
 
         [Required(ErrorMessage = "A rendszám megadása kötelező.")]
         [StringLength(10)]
