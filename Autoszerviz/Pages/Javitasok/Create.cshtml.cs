@@ -29,10 +29,6 @@ public class CreateModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        // A model binding által létrehozott rendszerüzeneteket töröljük,
-        // csak a saját magyar ellenőrzésünk marad.
-        ModelState.Remove("Input.UgyfelId");
-
         if (Input.UgyfelId <= 0)
         {
             ModelState.AddModelError("Input.UgyfelId", "Kérlek, válassz ügyfelet a listából.");
@@ -79,8 +75,6 @@ public class CreateModel : PageModel
 
     public class JavitasInput
     {
-        // Nincs [Range] és nincs [Required] a mezőn: a kiválasztás hiányát
-        // a fenti kézi ellenőrzés kezeli magyar üzenettel.
         public int UgyfelId { get; set; }
 
         [Required(ErrorMessage = "A rendszám megadása kötelező.")]
