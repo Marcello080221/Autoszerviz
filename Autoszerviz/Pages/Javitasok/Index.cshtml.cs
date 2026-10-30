@@ -68,9 +68,10 @@ public class IndexModel : PageModel
                 return RedirectToPage();
             }
 
-            javitas.Koltseg = koltseg;
+            //javitas.Koltseg = koltseg;
         }
 
+        javitas.Koltseg = koltseg;
         javitas.Allapot = ujAllapot;
         await _db.SaveChangesAsync();
 
