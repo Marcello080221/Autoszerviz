@@ -3,14 +3,25 @@
 @{
     ViewData["Title"] = "Javítások";
 }
+
+<h1>Javítások</h1>
+
 @if (TempData["Hiba"] is string hiba)
 {
     <div class="alert alert-danger">@hiba</div>
 }
 
-<h1>Javítások</h1>
-
 <p><a asp-page="Create" class="btn btn-primary">Új javítás</a></p>
+
+<form method="get" class="mb-3">
+    <select name="Szuro" class="form-select d-inline-block w-auto">
+        <option value="">Összes állapot</option>
+        <option value="Felveve">Felvéve</option>
+        <option value="Folyamatban">Folyamatban</option>
+        <option value="Kesz">Kész</option>
+    </select>
+    <button type="submit" class="btn btn-secondary">Szűrés</button>
+</form>
 
 <table class="table">
     <thead>
@@ -36,4 +47,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table> 

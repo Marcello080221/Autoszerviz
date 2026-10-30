@@ -17,10 +17,21 @@ public class IndexModel : PageModel
 
     public IList<Javitas> Javitasok { get; set; } = new List<Javitas>();
 
+    [BindProperty(SupportsGet = true)]
+    public JavitasAllapot? Szuro { get; set; }
+
     public async Task OnGetAsync()
     {
-        Javitasok = await _db.Javitasok
+        var lekerdezes = _db.Javitasok
             .Include(j => j.Ugyfel)
+            .AsQueryable();
+
+        if (Szuro.HasValue)
+        {
+            lekerdezes = lekerdezes.Where(j => j.Allapot == Szuro.Value);
+        }
+
+        Javitasok = await lekerdezes
             .OrderByDescending(j => j.FelvetelDatuma)
             .ToListAsync();
     }
@@ -35,7 +46,7 @@ public class IndexModel : PageModel
             return RedirectToPage();
         }
 
-        if (ujAllapot == JavitasAllapot.Kesz)
+        if (ujAllapot == JavitasAllapot.Kész)
         {
             if (koltseg is null || koltseg <= 0)
             {

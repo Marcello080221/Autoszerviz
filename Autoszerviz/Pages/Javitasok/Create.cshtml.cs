@@ -53,7 +53,7 @@ public class CreateModel : PageModel
             UgyfelId = Input.UgyfelId.Value,
             Rendszam = Input.Rendszam.Trim().ToUpperInvariant(),
             Leiras = Input.Leiras,
-            Allapot = JavitasAllapot.Felveve,
+            Allapot = JavitasAllapot.Felvéve,
             FelvetelDatuma = DateTime.Now
         };
 

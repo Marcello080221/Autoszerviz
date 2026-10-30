@@ -26,7 +26,7 @@
         @foreach (var u in Model.Ugyfelek)
         {
             <tr>
-                <td>@u.Nev</td>
+                <td><a asp-page="Details" asp-route-id="@u.Id">@u.Nev</a></td>
                 <td>@u.Telefon</td>
                 <td>@u.Email</td>
                 <td>
