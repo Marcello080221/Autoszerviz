@@ -1,0 +1,42 @@
+@page "{id:int}"
+@model Autoszerviz.Pages.Ugyfelek.DetailsModel
+@{
+    ViewData["Title"] = "Ügyfél részletei";
+}
+
+<h1>@Model.Ugyfel.Nev</h1>
+
+<p>
+    Telefon: @Model.Ugyfel.Telefon<br />
+    E-mail: @Model.Ugyfel.Email
+</p>
+
+<h3>Javítások</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Rendszám</th>
+            <th>Leírás</th>
+            <th>Költség</th>
+            <th>Állapot</th>
+            <th>Felvétel</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var j in Model.Javitasok)
+        {
+            <tr>
+                <td>@j.Rendszam</td>
+                <td>@j.Leiras</td>
+                <td>@(j.Koltseg?.ToString("C0") ?? "-")</td>
+                <td>@j.Allapot</td>
+                <td>@j.FelvetelDatuma.ToString("yyyy.MM.dd HH:mm")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p><strong>Összköltség: @Model.OsszKoltseg.ToString("C0")</strong></p>
+
+<a asp-page="Index" class="btn btn-secondary">Vissza</a>
