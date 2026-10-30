@@ -50,7 +50,7 @@ public class CreateModel : PageModel
 
         var javitas = new Javitas
         {
-            UgyfelId = Input.UgyfelId,
+            UgyfelId = Input.UgyfelId.Value,
             Rendszam = Input.Rendszam.Trim().ToUpperInvariant(),
             Leiras = Input.Leiras,
             Allapot = JavitasAllapot.Felveve,
@@ -75,6 +75,7 @@ public class CreateModel : PageModel
 
     public class JavitasInput
     {
+        [Required(ErrorMessage = "Kérlek, válassz ügyfelet a listából.")]
         public int? UgyfelId { get; set; }
 
         [Required(ErrorMessage = "A rendszám megadása kötelező.")]
